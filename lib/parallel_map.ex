@@ -10,11 +10,8 @@ defmodule ParallelMap do
     end)
     |> Enum.map(
       fn(pid)->
-        IO.puts "Making receive block #{inspect pid}"
-        #How does the map know to wait until receive block is completed
         receive do
           {^pid, result} ->
-            IO.puts "Received result#{inspect pid} #{inspect result}"
             result
         end
       end
@@ -27,9 +24,7 @@ defmodule MapWorker do
   def work do
     receive do
       {sender, fun, elem} ->
-        IO.puts "Worker doing elem #{inspect elem}"
         result = fun.(elem)
-        IO.puts "Worker made result #{inspect result}"
         send( sender, {self, result} )
     end
   end
