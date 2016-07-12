@@ -3,6 +3,7 @@ defmodule Mocks do
     Enum.reduce(1..100000, fn(element, reducer)-> reducer + :math.sqrt(element) * number end)
   end
 end
+
 #
 # defmodule MapSpeedTest do
 #   use ExUnit.Case
